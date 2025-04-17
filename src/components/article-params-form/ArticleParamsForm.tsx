@@ -5,6 +5,7 @@ import {
 	ArticleStateType,
 	backgroundColors,
 	contentWidthArr,
+	defaultArticleState,
 	fontColors,
 	fontFamilyOptions,
 	fontSizeOptions,
@@ -32,14 +33,14 @@ export const ArticleParamsForm = ({
 }: ArticleParamsFormProps) => {
 	const [selectedStateArticle, setSelectedStateArticle] =
 		useState<ArticleStateType>(stateArticle);
-	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 	const rootRef = useRef<HTMLDivElement>(null);
 
 	useOutsideClickClose({
-		isOpen,
+		isOpen: isMenuOpen,
 		rootRef,
-		onClose: () => !isOpen,
-		onChange: setIsOpen,
+		onClose: () => !isMenuOpen,
+		onChange: setIsMenuOpen,
 	});
 
 	const handleChangeSelectedState = (
@@ -55,19 +56,22 @@ export const ArticleParamsForm = ({
 	};
 
 	const handleResetStateArticle = () => {
-		setSelectedStateArticle(stateArticle);
+		setStateArticle(defaultArticleState);
+		setSelectedStateArticle(defaultArticleState);
 	};
 
 	return (
 		<>
 			<ArrowButton
-				isOpen={isOpen}
+				isOpen={isMenuOpen}
 				onClick={() => {
-					setIsOpen(!isOpen);
+					setIsMenuOpen(!isMenuOpen);
 				}}
 			/>
 			<aside
-				className={clsx(styles.container, isOpen && styles.container_open)}
+				className={clsx(styles.container, {
+					[styles.container_open]: isMenuOpen,
+				})}
 				ref={rootRef}>
 				<form
 					style={{ rowGap: 50 }}
