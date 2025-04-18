@@ -177,3 +177,19 @@ export const defaultArticleState = {
 };
 
 export type ArticleStateType = typeof defaultArticleState;
+
+type HeadSelect = {
+	fontFamily: string;
+	fontColor: string;
+	fontSize: string;
+	backgroundColor: string;
+	contentWidth: string;
+};
+
+export const headSelect: HeadSelect = {
+	fontFamily: 'шрифт',
+	fontColor: 'Цвет шрифта',
+	fontSize: 'рАЗМЕР шрифта',
+	backgroundColor: 'Цвет фона',
+	contentWidth: 'Ширина контента',
+};
